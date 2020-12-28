@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ namespace Swagger_aspNetCore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         #region Get
@@ -18,9 +20,10 @@ namespace Swagger_aspNetCore.Controllers
         /// <param name="name"></param>
         /// <returns></returns>
         [HttpGet]
-        public string Get(string name)
+        public Object Get(string name)
         {
-            return $"My name is {name}";
+            string result = $"My name is {name}";
+            return new { status = "Success", data = result };
         }
         #endregion
 

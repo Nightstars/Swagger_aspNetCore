@@ -23,10 +23,11 @@ namespace Swagger_aspNetCore.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
         /// <summary>
         /// 获取所有信息
         /// </summary>
+        /// <returns></returns>
+        [HttpGet]       
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();

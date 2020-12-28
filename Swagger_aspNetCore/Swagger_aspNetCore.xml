@@ -4,6 +4,14 @@
         <name>Swagger_aspNetCore</name>
     </assembly>
     <members>
+        <member name="M:Swagger_aspNetCore.Controllers.AccountController.Login(System.String,System.String)">
+            <summary>
+            <![CDATA[获取访问令牌]]>
+            </summary>
+            <param name="user">用户名</param>
+            <param name="password">密码</param>
+            <returns></returns>
+        </member>
         <member name="M:Swagger_aspNetCore.Controllers.UserController.Get(System.String)">
             <summary>
             带一个参数的Get请求
@@ -32,6 +40,44 @@
             </summary>
             <param name="name"></param>
             <returns></returns>
+        </member>
+        <member name="M:Swagger_aspNetCore.Controllers.WeatherForecastController.Get">
+            <summary>
+            获取所有信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Swagger_aspNetCore.Models.RestfulData.code">
+            <summary>
+            <![CDATA[错误码]]>
+            </summary>
+        </member>
+        <member name="P:Swagger_aspNetCore.Models.RestfulData.message">
+             <summary>
+            <![CDATA[消息]]>
+             </summary>
+        </member>
+        <member name="P:Swagger_aspNetCore.Models.RestfulData.url">
+            <summary>
+            <![CDATA[相关的链接帮助地址]]>
+            </summary>
+        </member>
+        <member name="T:Swagger_aspNetCore.Models.RestfulData`1">
+             <summary>
+            
+             </summary>
+             <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Swagger_aspNetCore.Models.RestfulData`1.data">
+            <summary>
+            <![CDATA[数据]]>
+            </summary>
+        </member>
+        <member name="T:Swagger_aspNetCore.Models.RestfulArray`1">
+            <summary>
+            <![CDATA[返回数组]]>
+            </summary>
+            <typeparam name="T"></typeparam>
         </member>
     </members>
 </doc>
