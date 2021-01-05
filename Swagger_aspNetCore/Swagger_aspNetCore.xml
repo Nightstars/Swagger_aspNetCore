@@ -4,14 +4,6 @@
         <name>Swagger_aspNetCore</name>
     </assembly>
     <members>
-        <member name="M:Swagger_aspNetCore.Controllers.AccountController.Login(System.String,System.String)">
-            <summary>
-            <![CDATA[获取访问令牌]]>
-            </summary>
-            <param name="user">用户名</param>
-            <param name="password">密码</param>
-            <returns></returns>
-        </member>
         <member name="M:Swagger_aspNetCore.Controllers.UserController.Get(System.String)">
             <summary>
             带一个参数的Get请求
@@ -47,37 +39,24 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="P:Swagger_aspNetCore.Models.RestfulData.code">
+        <member name="F:Swagger_aspNetCore.Models.BasicAuthenticationHandler._userService">
             <summary>
-            <![CDATA[错误码]]>
+            initialize
             </summary>
         </member>
-        <member name="P:Swagger_aspNetCore.Models.RestfulData.message">
-             <summary>
-            <![CDATA[消息]]>
-             </summary>
-        </member>
-        <member name="P:Swagger_aspNetCore.Models.RestfulData.url">
+        <member name="M:Swagger_aspNetCore.Models.BasicAuthenticationHandler.HandleAuthenticateAsync">
             <summary>
-            <![CDATA[相关的链接帮助地址]]>
+            HandleAuthenticateAsync
             </summary>
+            <returns></returns>
         </member>
-        <member name="T:Swagger_aspNetCore.Models.RestfulData`1">
-             <summary>
-            
-             </summary>
-             <typeparam name="T"></typeparam>
-        </member>
-        <member name="P:Swagger_aspNetCore.Models.RestfulData`1.data">
+        <member name="M:Swagger_aspNetCore.Services.UserService.ValidateCredentials(System.String,System.String)">
             <summary>
-            <![CDATA[数据]]>
+            ValidateCredentials
             </summary>
-        </member>
-        <member name="T:Swagger_aspNetCore.Models.RestfulArray`1">
-            <summary>
-            <![CDATA[返回数组]]>
-            </summary>
-            <typeparam name="T"></typeparam>
+            <param name="username"></param>
+            <param name="password"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

@@ -1,23 +1,15 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swagger_aspNetCore.Models;
+using Swagger_aspNetCore.Services;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Swagger_aspNetCore
 {
@@ -69,33 +61,24 @@ namespace Swagger_aspNetCore
                         }
                     }
                 );
+
                 c.AddSecurityDefinition("dotnet5 Web API", new OpenApiSecurityScheme
                 {
-                    Description = "JWT授权(数据将在请求头中进行传输) 在下方输入Bearer {token} 即可，注意两者之间有空格",
-                    Name = "Authorization",//jwt默认的参数名称
-                    In = ParameterLocation.Header,//jwt默认存放Authorization信息的位置(请求头中)
-                    Type = SecuritySchemeType.ApiKey
+                    Description = "Basic Authorization in Swagger",
+                    Name = "Authorization",
+                    Scheme= "basic",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http
                 });
                 #endregion
 
-
             });
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options => {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,//是否验证Issuer
-                    ValidateAudience = true,//是否验证Audience
-                    ValidateLifetime = true,//是否验证失效时间
-                    ValidateIssuerSigningKey = true,//是否验证SecurityKey
-                    ValidAudience = Configuration["audience"],//Audience
-                    ValidIssuer = Configuration["issuer"],//Issuer，这两项和签发jwt的设置一致
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["SecurityKey"]))//拿到SecurityKey
-                };
-            });
+            services.AddAuthentication("BasicAuthentication")
+                  .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
             services.AddControllers();
+            services.AddScoped<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -123,7 +106,10 @@ namespace Swagger_aspNetCore
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{Controller=swagger}/{action=Index}/{id?}"
+                );
             });
         }
     }
